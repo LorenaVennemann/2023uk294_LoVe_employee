@@ -3,15 +3,17 @@ import * as React from 'react';
 import EmployeeService, { headers } from '../Service/EmployeeService';
 import { Employee } from '../Types/Employee';
 import { Button, TextField } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const UserLogin = () => {
   const [data, setData] = React.useState([]);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
-    EmployeeService().getAllEmloyees()
+    EmployeeService().getAllEmployees()
       .then((employees) => setData(employees));
   }, []);
 
@@ -19,6 +21,7 @@ const UserLogin = () => {
     if (email && password) {
       console.log(`Email: ${email}, Password: ${password}, access Token: ${headers.Authorization}`);
       setIsLoggedIn(true);
+      navigate("/employee", {replace: true});
     }
   };
 
