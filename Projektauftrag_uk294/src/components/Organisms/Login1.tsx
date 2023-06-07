@@ -1,9 +1,10 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 
 import EmployeeService, { headers } from '../Service/EmployeeService';
-import { Employee } from '../Types/Employee';
-import { Button, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { defaultAxiosInstance } from '../Service/Api';
+import { Button, TextField } from '@mui/material';
+import { Employee } from '../Types/Employee';
 
 const UserLogin = () => {
   const [data, setData] = React.useState([]);
@@ -12,7 +13,7 @@ const UserLogin = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  useEffect(() => {
     EmployeeService().getAllEmployees()
       .then((employees) => setData(employees));
   }, []);
@@ -22,6 +23,7 @@ const UserLogin = () => {
       console.log(`Email: ${email}, Password: ${password}, access Token: ${headers.Authorization}`);
       setIsLoggedIn(true);
       navigate("/employee", {replace: true});
+      EmployeeService(defaultAxiosInstance).getAllEmployees();
     }
   };
 
