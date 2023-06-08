@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Home } from '@mui/icons-material';
 import EmployeeList from './components/Pages/EmployeeList';
 import UserLogin from './components/Pages/Login1';
 import EditingEmployee from './components/Pages/EditingEmployee';
