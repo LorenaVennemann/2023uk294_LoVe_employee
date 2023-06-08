@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 import { Card } from "@mui/material";
 import EmployeeService from "../Service/EmployeeService";
 import { Employee } from "../Types/Employee";
@@ -35,8 +34,6 @@ const EmployeeList = () => {
                 <h2>{`${employee.first_name} ${employee.last_name}`}</h2>
                 <p>{`ID: ${employee.id}`}</p>
                 <p>{`Gender: ${employee.gender}`}</p>
-                <p>{`Birth Date: ${employee.birth_date}`}</p>
-                <p>{`Hire Date: ${employee.hire_date}`}</p>
                 <div className="actions">
                 <Link to={`/employee/${employee.id}/edit`}>Edit</Link>
                 <br />

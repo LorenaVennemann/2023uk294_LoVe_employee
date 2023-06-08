@@ -3,10 +3,10 @@ import { defaultAxiosInstance } from "./Api";
 import { Employee } from "../Types/Employee";
 
 const EmployeeService = (api: AxiosInstance = defaultAxiosInstance) => ({
-  
+
   getAllEmployees: async () => {
     const data = await api.get("employee");
-    return data["data"];
+    return data["data"]; 
   },
   
   getEmployeeById: async (id: number) => {

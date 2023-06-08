@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import EmployeeService from '../Service/EmployeeService';
 import { Employee } from '../Types/Employee';
 
@@ -25,9 +25,12 @@ const EmployeeDetails = () => {
   return (
     <div>
       <h1>{`${employee.first_name} ${employee.last_name}`}</h1>
+      <p>ID: {employee.id}</p>
       <p>Birth Date: {employee.birth_date}</p>
       <p>Gender: {employee.gender}</p>
       <p>Hire Date: {employee.hire_date}</p>
+      <br />
+      <Link to={`/employee `}>Back</Link>
     </div>
   );
 };

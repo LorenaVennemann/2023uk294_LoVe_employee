@@ -6,6 +6,10 @@ import EmployeeList from './components/Pages/EmployeeList';
 import UserLogin from './components/Pages/Login1';
 import EditingEmployee from './components/Pages/EditingEmployee';
 import EmployeeDetails from './components/Pages/ViewEmployee';
+import EmployeeAdd from './components/Pages/AddEmployee';
+
+
+
 
 function App() {
   return (
@@ -16,7 +20,8 @@ function App() {
         <Route path="/employee" element={<EmployeeList/>}></Route>
         <Route path="/employee/:id/edit" element={<EditingEmployee />} />
         <Route path="/employee/:id/view" element={<EmployeeDetails />} />
-      </Routes>
+        <Route path="/employee/create" element={<EmployeeAdd/>}></Route>
+      </Routes> 
     </BrowserRouter>
    
   );
