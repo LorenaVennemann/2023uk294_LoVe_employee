@@ -1,29 +1,32 @@
-import React, { useEffect } from 'react';
-
-import EmployeeService, { headers } from '../Service/EmployeeService';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { defaultAxiosInstance } from '../Service/Api';
 import { Button, TextField } from '@mui/material';
 import { Employee } from '../Types/Employee';
+import login from '../Service/LoginService';
+import { defaultAxiosInstance } from '../Service/Api';
+import EmployeeService from '../Service/EmployeeService';
+import { Token } from '@mui/icons-material';
 
 const UserLogin = () => {
-  const [data, setData] = React.useState([]);
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [employees, setEmployees] = useState<Employee[]>([]);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
-    EmployeeService().getAllEmployees()
-      .then((employees) => setData(employees));
+ //   EmployeeService().getAllEmployees()
+   //    .then((employees) => setEmployees(employees));
   }, []);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (email && password) {
-      console.log(`Email: ${email}, Password: ${password}, access Token: ${headers.Authorization}`);
+      console.log(`Email: ${email}, Password: ${password}`);
+      const accessToken = await login().loginUser(email, password);
+      console.log(`Access Token: ${accessToken}`);
+      localStorage.setItem("accessToken", accessToken); 
       setIsLoggedIn(true);
-      navigate("/employee", {replace: true});
-      EmployeeService(defaultAxiosInstance).getAllEmployees();
+      navigate('/employee', { replace: true });
     }
   };
 
@@ -31,7 +34,7 @@ const UserLogin = () => {
     <div>
       {!isLoggedIn && (
         <>
-        <h1>Welcome</h1>
+          <h1>Welcome</h1>
           <TextField
             label="Email"
             type="email"
@@ -51,12 +54,11 @@ const UserLogin = () => {
           <Button variant="contained" color="primary" onClick={handleLogin}>
             Login
           </Button>
-          {data.map((employee: Employee) => (
+          {employees.map((employee) => (
             <div key={employee.id}></div>
           ))}
         </>
       )}
-      {isLoggedIn && <div></div>}
     </div>
   );
 };

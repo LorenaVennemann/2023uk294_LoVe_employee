@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Employee } from "../Types/Employee";
-import EmployeeService from "../Service/EmployeeService";
+
 import { Card } from "@mui/material";
+import EmployeeService from "../Service/EmployeeService";
+import { Employee } from "../Types/Employee";
 
 
 const EmployeeList = () => {
@@ -25,7 +26,7 @@ const EmployeeList = () => {
       <Link to="/employee/create">Add Employee</Link>
       <div className="employee-list">
         {employees.map((employee: Employee & { id?: number }) => (
-          <Card key={employee.id}>const cardImageStyles = {
+          <Card key={employee.id}> {
           };
             <div style={{ display: "flex", float: "left", width: "100px", height: "100px"  }}>
                 <img src="https://media.istockphoto.com/id/666545204/de/vektor/standard-platzhalter-profil-icon.jpg?s=612x612&w=0&k=20&c=REFVSS5uJBPCRm5rcDaOpJ3Behqj4A9cD6kx1ONjaDk=" alt={`${employee.first_name} ${employee.last_name}`} />
@@ -37,7 +38,10 @@ const EmployeeList = () => {
                 <p>{`Birth Date: ${employee.birth_date}`}</p>
                 <p>{`Hire Date: ${employee.hire_date}`}</p>
                 <div className="actions">
-                  <Link to={`/employee/${employee.id}`}>Edit</Link>
+                <Link to={`/employee/${employee.id}/edit`}>Edit</Link>
+                <br />
+                <Link to={`/employee/${employee.id}/view`}>View</Link>
+                <br />
                   <button onClick={() => handleDelete(employee.id)}>Delete</button>
                 </div>
               </div>
